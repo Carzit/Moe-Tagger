@@ -18,7 +18,7 @@ with open('checkpoint.json', 'r') as f:
     start_index = checkpoint['stop_at_index'] # 起始图片索引（从第几张图片开始打标）
                                               # 可查看checkpoint.json中保存的最后一次打标的截至索引(stop_at_index)，将其值填入， 从该处继续打标
 
-# 以下代码最后不要动捏
+# 以下代码最好不要动捏
 list_os = os.listdir(dir_path)
 labels = []
 
@@ -26,7 +26,7 @@ def mouse_click(event, x, y, flags, para):
     global labels
     if event == cv2.EVENT_LBUTTONDOWN:
         labels.append((x, y))
-        print('successfully get point!')
+        print('successfully get point')
 
 def save_checkpoint(index, name):
     last = {
