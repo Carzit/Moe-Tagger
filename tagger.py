@@ -59,10 +59,14 @@ if __name__ == '__main__':
         print(f'index:{image_index}, name:{img_name}')
 
         cv2.imshow('img', img_read)
-        if cv2.waitKey() == ord('q'): # press 'q' to quit
+
+        key = cv2.waitKey()
+        if key == ord('q'): # press 'q' to quit
             save_checkpoint(image_index, img_name)
             break
-        if cv2.waitKey() == ord('p'): # press 'p' to pass (next image)
+        if key == ord('r'):
+            points = []
+        if key == ord('p'): # press 'p' to pass (next image)
             if len(points) != 4:
                 save_checkpoint(image_index, img_name)
                 raise ValueError(f'''标点数目有误！
