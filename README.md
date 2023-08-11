@@ -14,7 +14,12 @@ Tagger for text areas of Moe-Captcha
 
 ![](https://github.com/Carzit/Moe-Tagger/blob/main/example/example2.PNG)
 
-  （点击后若标记成功，控制台会打印“successfully get point!”）
+  点击后若标记成功，控制台会打印“successfully get point!”
+
+![](https://github.com/Carzit/Moe-Tagger/blob/main/example/example3.PNG)
+
+  点与点之间会自动连线，标定区域如图所示
+
 -  每张图完成后，按p键进入下一张图（若无反应，请按两下）
 -  按q键退出标注程序
 
