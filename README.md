@@ -4,6 +4,7 @@ Tagger for text areas of Moe-Captcha
 
 # How to use
 - 安装依赖：pip install -r requirement.txt 或 pip install opencv-python numpy
+- 下载后请将Images和Tags文件夹内用于占位的txt文件删除
 - 运行程序tagger.py
   运行后会弹出如下窗口
   
