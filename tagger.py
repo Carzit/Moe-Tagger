@@ -1,9 +1,11 @@
 import os
 import datetime
 import json
+import win32api
 
 import cv2
 import numpy as np
+
 
 '''
 tag the text area of moe-captcha
@@ -18,9 +20,10 @@ with open('checkpoint.json', 'r') as f:
     start_index = checkpoint['stop_at_index'] # 起始图片索引（从第几张图片开始打标）
                                               # 可查看checkpoint.json中保存的最后一次打标的截至索引(stop_at_index)，将其值填入， 从该处继续打标
 
-# 以下代码最后不要动捏
+# 以下代码最好不要动捏
 list_os = os.listdir(dir_path)
 points = []
+
 
 def mouse_click(event, x, y, flags, para):
     global points
@@ -31,7 +34,7 @@ def mouse_click(event, x, y, flags, para):
             cv2.line(img_read, points[-2], points[-1], (0, 255, 0), 2)
         if len(points) == 4:
             cv2.line(img_read, points[-1], points[0], (0, 255, 0), 2)
-        cv2.imshow('img', img_read)
+        cv2.imshow('Moe-Tagger', img_read)
         print('successfully get point')
 
 def save_checkpoint(index, name):
@@ -46,8 +49,10 @@ def save_checkpoint(index, name):
 
 
 if __name__ == '__main__':
-    cv2.namedWindow('img', cv2.WINDOW_NORMAL)
-    cv2.setMouseCallback("img", mouse_click)
+    cv2.namedWindow('Moe-Tagger', cv2.WINDOW_GUI_NORMAL)# cv2.WINDOW_NORMAL | cv2.WINDOW_KEEPRATIO | cv2.WINDOW_GUI_NORMAL | cv2.WINDOW_AUTOSIZE
+    cv2.setMouseCallback('Moe-Tagger', mouse_click)
+
+    win32api.LoadKeyboardLayout('00000409', 1) # 将输入法设为英语
 
     image_index = start_index
 
@@ -58,7 +63,7 @@ if __name__ == '__main__':
         img_read = cv2.imread(img_name)  # the depth image
         print(f'index:{image_index}, name:{img_name}')
 
-        cv2.imshow('img', img_read)
+        cv2.imshow('Moe-Tagger', img_read)
 
         key = cv2.waitKey()
         if key == ord('q'): # press 'q' to quit
@@ -66,6 +71,7 @@ if __name__ == '__main__':
             break
         if key == ord('r'):
             points = []
+            print('successfully replaced!')
         if key == ord('p'): # press 'p' to pass (next image)
             if len(points) != 4:
                 save_checkpoint(image_index, img_name)
